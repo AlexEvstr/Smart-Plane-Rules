@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundMovement : MonoBehaviour
 {
-    private float _bgSpeed = 5.0f;
+    private float _bgSpeed = 2.0f;
     private Vector2 _startPosition;
     private float _halfWigth;
 
