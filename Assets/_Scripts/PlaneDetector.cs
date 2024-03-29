@@ -15,6 +15,8 @@ public class PlaneDetector : MonoBehaviour
 
     [SerializeField] private GameObject _correct;
     [SerializeField] private GameObject _wrong;
+    [SerializeField] private GameObject _portal;
+    [SerializeField] private GameObject _gameOver;
 
     private List<string> _aArticle = new List<string>{ "Wolf", "Pen", "Child", "Spoon", "Plate", "Unicorn", "Mouse", "Ruler", "Teacher", "Boy", "Pencil", "Uniform", "Cherry", "Bus"}; 
     private List<string> _anArticle = new List<string> { "Apple", "Hour", "Orange", "Elephant", "Umbrella", "Eye", "Airplane", "Onion", "Armchair" };
@@ -81,6 +83,8 @@ public class PlaneDetector : MonoBehaviour
 
     private IEnumerator ShowCorrect()
     {
+        Score.gameScore++;
+
         _correct.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         _correct.SetActive(true);
         float aColor = 1f;
@@ -114,7 +118,18 @@ public class PlaneDetector : MonoBehaviour
 
         if (_heartIndex == 3)
         {
-            Debug.Log("Game over");
+            StartCoroutine(GameOverBehavior());
         }
+    }
+
+    private IEnumerator GameOverBehavior()
+    {
+        GameObject portal = Instantiate(_portal);
+        portal.transform.position = new Vector3(0, -5, 0);
+        QuestionMovement.QuestionSpeed = 0;
+        yield return new WaitForSeconds(2.5f);
+        Destroy(portal);
+        _gameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 }
