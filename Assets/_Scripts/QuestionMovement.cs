@@ -9,6 +9,5 @@ public class QuestionMovement : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector2.left * Time.deltaTime * _questionSpeed);
-        //Debug.Log(transform.position);
     }
 }

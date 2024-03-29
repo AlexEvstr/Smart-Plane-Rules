@@ -19,6 +19,10 @@ public class PlaneDetector : MonoBehaviour
     private List<string> _aArticle = new List<string>{ "Wolf", "Pen", "Child", "Spoon", "Plate", "Unicorn", "Mouse", "Ruler", "Teacher", "Boy", "Pencil", "Uniform", "Cherry", "Bus"}; 
     private List<string> _anArticle = new List<string> { "Apple", "Hour", "Orange", "Elephant", "Umbrella", "Eye", "Airplane", "Onion", "Armchair" };
 
+
+    [SerializeField] private GameObject[] _hearts;
+    private int _heartIndex = 0;
+
     private void Start()
     {
         NewQuestion();
@@ -34,6 +38,7 @@ public class PlaneDetector : MonoBehaviour
             }
             else
             {
+                MinusHeart();
                 StartCoroutine(ShowWrong());
             }
 
@@ -47,6 +52,7 @@ public class PlaneDetector : MonoBehaviour
             }
             else
             {
+                MinusHeart();
                 StartCoroutine(ShowWrong());
             }
 
@@ -101,5 +107,14 @@ public class PlaneDetector : MonoBehaviour
         _wrong.SetActive(false);
     }
 
+    private void MinusHeart()
+    {
+        _hearts[_heartIndex].SetActive(false);
+        _heartIndex++;
 
+        if (_heartIndex == 3)
+        {
+            Debug.Log("Game over");
+        }
+    }
 }
